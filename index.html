@@ -4,194 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>REBOUND — the weekly trend report</title>
+<title>Rebound · the weekly trend report</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --paper: #FAF6EF;
-    --ink: #14110F;
-    --pink: #FF2E88;
-    --yellow: #FFD02E;
-    --teal: #00B3A4;
-    --white: #FFFFFF;
-    --shadow: 6px 6px 0 var(--ink);
+  :root{
+    --forest:#1F4D3F;   --coral:#E8654A;    --coral-press:#B6452F;
+    --ink:#1A2421;      --stone:#6B7570;
+    --bone:#F7F4ED;     --mist:#E8EFE8;     --card:#EAF1EA;
+    --on-dark:#F7F4ED;  --on-dark-muted:#D6E4DE;
+    --card-border:rgba(31,77,63,0.5);
+    --hairline:rgba(26,36,33,0.16);
+    --ease:cubic-bezier(0.32,0.72,0.24,1);
+    --shadow-md:0 4px 16px -4px rgba(26,36,33,.08);
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Archivo', sans-serif;
-    line-height: 1.5;
-    background-image: radial-gradient(var(--ink) 0.5px, transparent 0.5px);
-    background-size: 28px 28px;
-    background-attachment: fixed;
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
   }
-  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.01em; }
+  h1,h2,h3 { font-family:'Lora',serif; font-weight:700; }
+  .accent { color:var(--coral); }
 
-  /* ---------- Ticker ---------- */
-  .ticker {
-    background: var(--pink);
-    color: var(--paper);
-    overflow: hidden;
-    white-space: nowrap;
-    border-bottom: 3px solid var(--ink);
-    padding: 0.45rem 0;
+  .eyebrow {
+    display:flex; align-items:center; gap:10px;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:0.78rem;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--forest);
   }
-  .ticker span {
-    display: inline-block;
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    animation: tick 28s linear infinite;
+  .eyebrow::before {
+    content:""; width:10px; height:10px; border-radius:50%;
+    background:var(--coral); flex:none;
   }
-  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ---------- Masthead ---------- */
-  header { padding: 3.2rem 6vw 1.6rem; }
-  .kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.22em; color: var(--pink); }
+  /* ---------- Header ---------- */
+  header {
+    padding: clamp(3rem,7vw,5.5rem) clamp(1.4rem,6vw,5rem) 2.2rem;
+    background: radial-gradient(60% 60% at 50% 20%, rgba(31,77,63,0.10), transparent 70%);
+  }
+  .masthead-row { display:flex; flex-wrap:wrap; align-items:flex-end; gap:1.4rem; justify-content:space-between; max-width:1200px; margin:0 auto; }
   h1.masthead {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(4rem, 13vw, 10.5rem);
-    line-height: 0.92;
-    text-transform: uppercase;
+    font-size: clamp(3rem, 8vw, 5.25rem);
+    line-height:1.02; letter-spacing:-0.025em;
+    margin-top:0.7rem;
   }
-  h1.masthead .accent { color: var(--pink); -webkit-text-stroke: 3px var(--ink); }
-  .masthead-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.2rem; justify-content: space-between; }
-  .week-pick { display: flex; align-items: center; gap: 0.6rem; padding-bottom: 0.8rem; }
+  .week-pick { display:flex; align-items:center; gap:0.7rem; padding-bottom:0.6rem; }
   select, .btn {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border: 3px solid var(--ink);
-    background: var(--white);
-    padding: 0.55rem 0.9rem;
-    box-shadow: 4px 4px 0 var(--ink);
-    cursor: pointer;
-    transition: transform 0.12s, box-shadow 0.12s;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:0.9rem;
+    border-radius:10px; padding:0.6rem 1.3rem; cursor:pointer;
+    transition: background 160ms var(--ease), color 160ms var(--ease), transform 160ms var(--ease);
   }
-  .btn:hover, select:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
-  .btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
-  .btn.pink { background: var(--pink); color: var(--paper); }
+  select { background:var(--bone); border:1px solid var(--card-border); color:var(--ink); }
+  .btn-primary { background:var(--coral); color:var(--bone); border:none; }
+  .btn-primary:hover { background:var(--coral-press); }
+  .btn-primary:active { transform:translateY(0.5px); }
+  .btn-ghost { background:transparent; border:none; color:var(--forest); }
+  .btn-ghost:hover { text-decoration:underline; }
+  :focus-visible { outline:2px solid var(--coral); outline-offset:2px; }
 
   /* ---------- Sections ---------- */
-  section { padding: 3.2rem 6vw; }
-  .sec-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink); opacity: 0.55; margin-bottom: 0.4rem; }
-  h2.sec-title { font-family: 'Anton', sans-serif; font-size: clamp(2.6rem, 6vw, 4.6rem); text-transform: uppercase; line-height: 0.95; margin-bottom: 0.6rem; }
-  h2 .hl { background: linear-gradient(transparent 55%, var(--yellow) 55%); padding: 0 0.1em; }
-  .sec-sub { max-width: 44rem; font-size: 1.02rem; margin-bottom: 2rem; }
+  section { padding: clamp(2.6rem,6vw,4.5rem) clamp(1.4rem,6vw,5rem); }
+  section > .inner { max-width:1200px; margin:0 auto; }
+  section.alt { background:var(--mist); }
+  section.statement { background:var(--forest); color:var(--on-dark-muted); }
+  section.statement h2 { color:var(--on-dark); }
+  section.statement .eyebrow { color:var(--on-dark-muted); }
+  h2.sec-title {
+    font-size: clamp(2rem,4.6vw,3.4rem);
+    line-height:1.08; letter-spacing:-0.02em;
+    margin:0.6rem 0 0.5rem;
+  }
+  .sec-sub { max-width:65ch; color:var(--stone); margin-bottom:2.2rem; font-size:1.02rem; }
+  section.statement .sec-sub { color:var(--on-dark-muted); }
 
   /* ---------- Cards ---------- */
-  .cards { display: grid; gap: 1.8rem; grid-template-columns: repeat(auto-fill, minmax(min(430px, 100%), 1fr)); }
+  .cards { display:grid; gap:1.6rem; grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr)); }
   .card {
-    background: var(--white);
-    border: 3px solid var(--ink);
-    box-shadow: var(--shadow);
-    padding: 1.6rem 1.5rem 1.4rem;
-    position: relative;
-    opacity: 0;
-    transform: translateY(24px);
-    animation: rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:18px;
+    padding: clamp(1.6rem,3vw,2.4rem);
+    transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+    opacity:0; transform:translateY(28px);
+    animation: rise 360ms var(--ease) forwards;
   }
-  @keyframes rise { to { opacity: 1; transform: none; } }
-  .badge {
-    position: absolute; top: -1rem; left: 1rem;
-    display: inline-block;
-    font-weight: 900; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
-    border: 3px solid var(--ink);
-    padding: 0.28rem 0.7rem;
-    transform: rotate(-2.5deg);
-    box-shadow: 3px 3px 0 var(--ink);
-    background: var(--yellow);
+  .card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+  @keyframes rise { to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation:none; opacity:1; transform:none; }
   }
-  .badge.marketing { background: var(--pink); color: var(--paper); }
-  .badge.financial_wellness { background: var(--yellow); }
-  .badge.springboard { background: var(--teal); color: var(--paper); }
-  .badge.community { background: var(--white); }
-  .badge.monitor { background: var(--paper); }
-  .card h3 { font-family: 'Anton', sans-serif; font-size: 1.7rem; line-height: 1.02; text-transform: uppercase; margin: 0.7rem 0 0.55rem; }
-  .hot-take { font-size: 1.02rem; font-weight: 500; font-style: italic; border-left: 5px solid var(--pink); padding-left: 0.8rem; margin-bottom: 0.9rem; }
-  .card .meta { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.6; margin-bottom: 0.8rem; }
-  .card p.body-copy { font-size: 0.94rem; margin-bottom: 0.85rem; }
+  .lane-chip {
+    display:inline-block; font-family:'Inter',sans-serif; font-weight:600; font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    border-radius:4px; padding:0.28rem 0.65rem;
+    background:var(--forest); color:var(--bone);
+  }
+  .lane-chip.monitor { background:transparent; color:var(--forest); border:1px solid var(--card-border); }
+  .card h3 { font-size:1.55rem; line-height:1.12; margin:0.9rem 0 0.5rem; }
+  .hot-take {
+    font-family:'Lora',serif; font-weight:500; font-size:1.08rem; line-height:1.4;
+    border-left:3px solid var(--coral); padding-left:0.9rem; margin-bottom:0.9rem;
+  }
+  .card .meta { font-size:0.74rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--stone); margin-bottom:0.8rem; }
+  .card p.body-copy { font-size:0.95rem; margin-bottom:0.9rem; }
   .card .action {
-    background: var(--paper); border: 2px dashed var(--ink);
-    padding: 0.7rem 0.9rem; font-size: 0.92rem; font-weight: 500; margin-bottom: 0.9rem;
+    background:var(--bone); border:1px solid var(--card-border); border-radius:10px;
+    padding:0.85rem 1rem; font-size:0.93rem; margin-bottom:0.95rem;
   }
-  .card .action strong { text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.14em; display: block; margin-bottom: 0.2rem; color: var(--pink); }
-  .hooks li { font-size: 0.92rem; margin: 0.35rem 0 0.35rem 1.1rem; }
-  .subhead { font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.16em; margin: 0.9rem 0 0.3rem; }
-  .links a { display: block; font-size: 0.88rem; color: var(--ink); font-weight: 500; text-decoration: none; border-bottom: 2px solid var(--pink); padding: 0.35rem 0; }
-  .links a:hover { background: var(--yellow); }
-  .links .src { opacity: 0.55; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; }
-  .meter { display: flex; gap: 0.3rem; align-items: center; margin-top: 0.9rem; }
-  .meter .dot { width: 14px; height: 14px; border: 2px solid var(--ink); border-radius: 50%; }
-  .meter .dot.on { background: var(--pink); }
-  .meter .lbl { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-left: 0.4rem; opacity: 0.6; }
-  details.receipts { margin-top: 0.9rem; }
-  details.receipts summary { cursor: pointer; font-weight: 900; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--pink); }
-  details.receipts ul { margin: 0.5rem 0 0 1.1rem; }
-  details.receipts li { font-size: 0.85rem; margin: 0.3rem 0; }
-  .ind-note { font-size: 0.8rem; opacity: 0.75; }
+  .card .action strong {
+    display:flex; align-items:center; gap:8px;
+    text-transform:uppercase; font-size:0.7rem; letter-spacing:0.16em; color:var(--forest); margin-bottom:0.25rem;
+  }
+  .card .action strong::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--coral); }
+  .hooks li { font-size:0.93rem; margin:0.35rem 0 0.35rem 1.1rem; }
+  .subhead { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.16em; color:var(--forest); margin:1rem 0 0.35rem; }
+  .links a { display:block; font-size:0.9rem; color:var(--ink); font-weight:500; text-decoration:none; border-bottom:1px solid var(--hairline); padding:0.4rem 0; transition:color 160ms var(--ease); }
+  .links a:hover { color:var(--coral-press); }
+  .links .src { color:var(--stone); font-size:0.74rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; }
+  .meter { display:flex; gap:0.35rem; align-items:center; margin-top:1rem; }
+  .meter .dot { width:12px; height:12px; border:1px solid var(--card-border); border-radius:50%; }
+  .meter .dot.on { background:var(--coral); border-color:var(--coral); }
+  .meter .lbl { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--stone); margin-left:0.45rem; }
+  details.receipts { margin-top:0.9rem; }
+  details.receipts summary { cursor:pointer; font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--forest); }
+  details.receipts summary:hover { color:var(--coral-press); }
+  details.receipts ul { margin:0.5rem 0 0 1.1rem; }
+  details.receipts li { font-size:0.86rem; margin:0.3rem 0; }
+  .ind-note { color:var(--stone); }
 
-  /* radar + pass rows */
-  .radar .card { background: var(--paper); }
-  .pass-list { border-top: 3px solid var(--ink); }
-  .pass-row { display: flex; gap: 1rem; align-items: baseline; padding: 0.9rem 0; border-bottom: 3px solid var(--ink); }
-  .pass-row .name { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 1.15rem; min-width: 12rem; }
-  .pass-row .why { font-size: 0.9rem; opacity: 0.75; }
+  /* radar cards sit on Mist, so use Bone fill for contrast */
+  section.alt .card { background:var(--bone); }
+
+  /* hard pass */
+  .pass-list { border-top:1px solid var(--hairline); max-width:1200px; }
+  .pass-row { display:flex; gap:1.4rem; align-items:baseline; padding:1rem 0; border-bottom:1px solid var(--hairline); }
+  .pass-row .name { font-family:'Lora',serif; font-weight:700; font-size:1.1rem; min-width:14rem; }
+  .pass-row .why { font-size:0.92rem; color:var(--stone); }
+  section.statement .pass-row .name { color:var(--on-dark); }
+  section.statement .pass-row .why { color:var(--on-dark-muted); }
+  section.statement .pass-list, section.statement .pass-row { border-color:rgba(247,244,237,0.25); }
 
   /* watchlist */
-  .watch-groups { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
-  .watch-groups h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--pink); margin-bottom: 0.5rem; }
-  .chip { display: inline-block; border: 2px solid var(--ink); background: var(--white); font-size: 0.78rem; font-weight: 700; padding: 0.18rem 0.55rem; margin: 0.15rem 0.15rem 0.15rem 0; box-shadow: 2px 2px 0 var(--ink); }
+  .watch-groups { display:grid; gap:1.6rem; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
+  .watch-groups h4 { display:flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.16em; color:var(--forest); margin-bottom:0.6rem; }
+  .watch-groups h4::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--coral); }
+  .chip { display:inline-block; background:var(--card); border:1px solid var(--card-border); border-radius:4px; font-size:0.8rem; font-weight:600; padding:0.2rem 0.6rem; margin:0.16rem 0.16rem 0.16rem 0; }
 
-  footer { padding: 2.5rem 6vw 3.5rem; font-size: 0.78rem; opacity: 0.65; }
+  footer { padding:2.6rem clamp(1.4rem,6vw,5rem) 3.4rem; }
+  .tagline {
+    font-family:'Lora',serif; font-weight:700; font-size:1.05rem;
+    display:flex; flex-wrap:nowrap; white-space:nowrap; align-items:center; gap:14px;
+    color:var(--forest);
+  }
+  .tagline .dot { width:11px; height:11px; border-radius:50%; background:var(--coral); display:inline-block; }
+  .colophon { margin-top:0.8rem; font-size:0.8rem; color:var(--stone); }
 
   /* ---------- Auth gate ---------- */
-  .gate { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 0 6vw; }
-  .gate h1 { font-family: 'Anton', sans-serif; font-size: clamp(3.4rem, 11vw, 9rem); text-transform: uppercase; line-height: 0.92; margin-bottom: 1rem; }
-  .gate p { max-width: 34rem; margin-bottom: 1.6rem; font-size: 1.05rem; }
-  .gate form { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-  .gate input {
-    font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 1rem;
-    border: 3px solid var(--ink); padding: 0.7rem 1rem; min-width: min(20rem, 80vw);
-    background: var(--white); box-shadow: 4px 4px 0 var(--ink);
+  .gate {
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+    padding:0 clamp(1.4rem,6vw,5rem);
+    background: radial-gradient(60% 60% at 50% 30%, rgba(31,77,63,0.10), transparent 70%);
   }
-  .gate input:focus { outline: 3px solid var(--pink); }
-  .gate .note { font-size: 0.85rem; opacity: 0.7; }
-  .err { color: var(--pink); font-weight: 700; margin-top: 0.8rem; }
-  .hidden { display: none !important; }
-  .loading { padding: 4rem 6vw; font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 2rem; }
+  .gate .inner { max-width:1200px; margin:0 auto; width:100%; }
+  .gate h1 { font-size:clamp(2.6rem,7vw,4.5rem); line-height:1.02; letter-spacing:-0.025em; margin:0.9rem 0 1rem; }
+  .gate p { max-width:60ch; margin-bottom:1.8rem; font-size:1.05rem; }
+  .gate form { display:flex; gap:0.8rem; flex-wrap:wrap; }
+  .gate input {
+    font-family:'Inter',sans-serif; font-size:1rem;
+    border:1px solid var(--hairline); border-radius:8px; padding:0.7rem 1rem;
+    min-width:min(20rem,80vw); background:#fff; color:var(--ink);
+  }
+  .gate input:focus { outline:2px solid var(--coral); outline-offset:2px; }
+  .gate .err { color:var(--coral-press); font-weight:600; margin-top:0.9rem; }
+  .hidden { display:none !important; }
+  .loading { padding:4rem clamp(1.4rem,6vw,5rem); font-family:'Lora',serif; font-weight:700; font-size:1.6rem; }
 
-  @media (max-width: 640px) {
-    .pass-row { flex-direction: column; gap: 0.2rem; }
-    header { padding-top: 2.2rem; }
+  @media (max-width:640px) {
+    .pass-row { flex-direction:column; gap:0.2rem; }
+    .tagline { font-size:0.9rem; gap:10px; }
   }
 </style>
 </head>
 <body>
 
-<div class="ticker"><span id="ticker-text">TRENDS BEFORE THEY'RE TRENDS &nbsp;•&nbsp; SPOTTED EARLY, USED WISELY &nbsp;•&nbsp; MARKETING TEAM EYES ONLY &nbsp;•&nbsp; TRENDS BEFORE THEY'RE TRENDS &nbsp;•&nbsp; SPOTTED EARLY, USED WISELY &nbsp;•&nbsp; MARKETING TEAM EYES ONLY &nbsp;•&nbsp;</span></div>
-
 <!-- AUTH GATE -->
 <div id="gate" class="gate">
-  <div class="kicker">Team access only</div>
-  <h1>Prove<br>you work<span style="color:var(--pink)"> here.</span></h1>
-  <p>This is the weekly trend report. If your email is on the team list, we'll send you a six-digit code. No password, no drama.</p>
-  <form id="email-form">
-    <input type="email" id="email" placeholder="you@uplan4life.com" required autocomplete="email">
-    <button class="btn pink" type="submit">Send code</button>
-  </form>
-  <form id="code-form" class="hidden">
-    <input type="text" id="code" inputmode="numeric" placeholder="6-digit code" required>
-    <button class="btn pink" type="submit">Let me in</button>
-  </form>
-  <p class="err hidden" id="auth-err"></p>
+  <div class="inner">
+    <div class="eyebrow">Team access</div>
+    <h1>The trend report is <span class="accent">for the team.</span></h1>
+    <p>If your email is on the list, we'll send you a 6-digit code. No password to remember.</p>
+    <form id="email-form">
+      <input type="email" id="email" placeholder="you@uspringlife.com" required autocomplete="email">
+      <button class="btn btn-primary" type="submit">Send code</button>
+    </form>
+    <form id="code-form" class="hidden">
+      <input type="text" id="code" inputmode="numeric" placeholder="6-digit code" required>
+      <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+    <p class="err hidden" id="auth-err"></p>
+  </div>
 </div>
 
 <div id="loading" class="loading hidden">Pulling the report…</div>
@@ -199,45 +214,58 @@
 <!-- REPORT -->
 <div id="report" class="hidden">
   <header>
-    <div class="kicker" id="report-kicker">The weekly trend report</div>
     <div class="masthead-row">
-      <h1 class="masthead">Re<span class="accent">bound</span></h1>
+      <div>
+        <div class="eyebrow" id="report-kicker">Weekly trend report</div>
+        <h1 class="masthead">Re<span class="accent">bound</span></h1>
+      </div>
       <div class="week-pick">
         <select id="week-select" title="Pick a week"></select>
-        <button class="btn" id="signout">Sign out</button>
+        <button class="btn btn-ghost" id="signout">Sign out</button>
       </div>
     </div>
   </header>
 
   <section id="sec-move">
-    <div class="sec-label">001 / Do something</div>
-    <h2 class="sec-title">The <span class="hl">move</span></h2>
-    <p class="sec-sub">Trends that cleared the bar this week, sorted by where they should live: straight marketing, financial-wellness content, a Springboard authority post, or a community play.</p>
-    <div class="cards" id="actionable-cards"></div>
+    <div class="inner">
+      <div class="eyebrow">Do something</div>
+      <h2 class="sec-title">The <span class="accent">move</span></h2>
+      <p class="sec-sub">Trends that cleared the bar this week, sorted by where they should live: straight marketing, financial-wellness content, a Springboard authority post, or a community play.</p>
+      <div class="cards" id="actionable-cards"></div>
+    </div>
   </section>
 
-  <section id="sec-radar" class="radar">
-    <div class="sec-label">002 / Patience</div>
-    <h2 class="sec-title">On the <span class="hl">radar</span></h2>
-    <p class="sec-sub">Not ripe yet. We're tracking velocity — if these accelerate, they graduate to The Move.</p>
-    <div class="cards" id="radar-cards"></div>
+  <section id="sec-radar" class="alt">
+    <div class="inner">
+      <div class="eyebrow">Patience</div>
+      <h2 class="sec-title">On the <span class="accent">radar</span></h2>
+      <p class="sec-sub">Not ripe yet. We're tracking velocity, if these accelerate, they graduate to The move.</p>
+      <div class="cards" id="radar-cards"></div>
+    </div>
   </section>
 
-  <section id="sec-pass">
-    <div class="sec-label">003 / No</div>
-    <h2 class="sec-title">Hard <span class="hl">pass</span></h2>
-    <p class="sec-sub">Looked at it. Not for us. Documented so nobody asks twice.</p>
-    <div class="pass-list" id="pass-rows"></div>
+  <section id="sec-pass" class="statement">
+    <div class="inner">
+      <div class="eyebrow">No</div>
+      <h2 class="sec-title">Hard pass</h2>
+      <p class="sec-sub">Looked at it. Not for us. Documented so nobody asks twice.</p>
+      <div class="pass-list" id="pass-rows"></div>
+    </div>
   </section>
 
   <section id="sec-watch">
-    <div class="sec-label">004 / Sources</div>
-    <h2 class="sec-title">What we <span class="hl">watch</span></h2>
-    <p class="sec-sub">The communities, creators, and journalists this report is built from — plus a weekly human pass over TikTok. Want something added? Tell Danny.</p>
-    <div class="watch-groups" id="watch-groups"></div>
+    <div class="inner">
+      <div class="eyebrow">Sources</div>
+      <h2 class="sec-title">What we <span class="accent">watch</span></h2>
+      <p class="sec-sub">The communities, creators, and journalists this report is built from, plus a weekly human pass over TikTok. Want something added? Tell Danny.</p>
+      <div class="watch-groups" id="watch-groups"></div>
+    </div>
   </section>
 
-  <footer id="report-footer"></footer>
+  <footer>
+    <div class="tagline"><span>Start Strong</span><span class="dot"></span><span>Live Well</span><span class="dot"></span><span>Spring Forward</span></div>
+    <div class="colophon" id="report-footer"></div>
+  </footer>
 </div>
 
 <script type="module">
@@ -252,7 +280,7 @@ const $ = (id) => document.getElementById(id);
 
 const LANES = {
   marketing:          { label: 'Marketing',          order: 0 },
-  financial_wellness: { label: 'Financial Wellness', order: 1 },
+  financial_wellness: { label: 'Financial wellness', order: 1 },
   springboard:        { label: 'Springboard',        order: 2 },
   community:          { label: 'Community',          order: 3 },
 };
@@ -283,8 +311,8 @@ function meterHtml(n) {
 function receiptsHtml(n) {
   const ev = (n.evidence ?? []).map((e) => `<li>${esc(e)}</li>`).join('');
   const inds = Object.entries(n.indicators ?? {}).map(([k, v]) => {
-    const mark = v.met === true ? '✔' : v.met === false ? '✘' : '?';
-    return `<li class="ind-note"><strong>${INDICATORS[k] ?? k} ${mark}</strong> — ${esc(v.note)}</li>`;
+    const mark = v.met === true ? '✓' : v.met === false ? '✗' : '?';
+    return `<li class="ind-note"><strong>${INDICATORS[k] ?? k} ${mark}</strong> · ${esc(v.note)}</li>`;
   }).join('');
   return `<details class="receipts"><summary>Receipts</summary><ul>${ev}</ul><ul>${inds}</ul></details>`;
 }
@@ -300,13 +328,14 @@ function linksHtml(n) {
 
 function cardHtml(n, i, { compact = false } = {}) {
   const l = lane(n);
+  const isMonitor = !LANES[l];
   const laneLabel = LANES[l]?.label ?? (l === 'monitor' ? 'Watching' : l);
   const hooks = (n.content_hooks ?? []).map((h) => `<li>${esc(h)}</li>`).join('');
-  return `<article class="card" style="animation-delay:${i * 0.08}s">
-    <span class="badge ${esc(l)}">${esc(laneLabel)}</span>
+  return `<article class="card" style="animation-delay:${i * 80}ms">
+    <span class="lane-chip${isMonitor ? ' monitor' : ''}">${esc(laneLabel)}</span>
     <h3>${esc(n.headline ?? n.name)}</h3>
     ${n.hot_take ? `<p class="hot-take">${esc(n.hot_take)}</p>` : ''}
-    <div class="meta">${esc(n.trend_class ?? '')}${n.continuation ? ' • continuing' : ''}</div>
+    <div class="meta">${esc(n.trend_class ?? '')}${n.continuation ? ' · continuing' : ''}</div>
     <p class="body-copy">${esc(n.summary)}</p>
     ${compact ? '' : `<p class="body-copy"><strong>Why you care:</strong> ${esc(n.relevance)}</p>`}
     <div class="action"><strong>The assignment</strong>${esc(n.recommendation?.action ?? '')}</div>
